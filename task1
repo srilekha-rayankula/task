@@ -1,0 +1,88 @@
+package helloworld;
+import java.util.*;
+import java.util.Map.Entry;
+class account {
+	int accountno;
+	String name;
+	int bal;
+	account(int accountno,String name,int bal){
+		this.name=name;
+		this.accountno=accountno;
+		this.bal=bal;
+	}
+	public int getAccountno() {
+		return accountno;
+	}
+	public void setAccountno(int accountno) {
+		this.accountno = accountno;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getBal() {
+		return bal;
+	}
+	public void setBal(int bal) {
+		this.bal = bal;
+	}
+}
+public class hashmapEx1 {
+public static void main(String[] args) {
+	account a1 = new account(123,"Srilekha",500);
+	account a2 = new account(124,"Radha",300);
+	account a3 = new account(125,"Raviteja",200);
+	account a4 = new account(126,"Saibabu",400);
+	HashMap hm = new HashMap();
+	hm.put(81790, a1);
+	hm.put(85007, a2);
+	hm.put(8333, a3);
+	hm.put(94402,a4);
+	//System.out.println(hm);
+	Set s = hm.entrySet();
+	Iterator itr = s.iterator();
+	while(itr.hasNext()) {
+		Entry e = (Entry)itr.next();
+		//System.out.println(e.getKey()+"  "+e.getValue());
+	}
+	System.out.println("press 1 to get the balance value");
+	System.out.println("press 2 to recharge");
+	System.out.println("Enter the choice");
+	Scanner sc = new Scanner(System.in);
+	int n = sc.nextInt();
+	switch(n) {
+	case 1:
+		System.out.println("Enter the phonenumber:");
+		int ph = sc.nextInt();
+		if(hm.containsKey(ph)) {
+			account a = (account) hm.get(ph);
+			System.out.println("phone exist");
+			System.out.println("Name is"+a.getName());
+			System.out.println("account number"+a.getAccountno());
+			System.out.println("Balance"+a.getBal());
+		}
+		else
+			System.out.println("Phonenumber doesnot exist");
+		break;
+	case 2:
+		System.out.println("Enter phone number");
+		int ph1 = sc.nextInt();
+		if(hm.containsKey(ph1)) {
+			System.out.println("Enter Amount of recharge");
+			int amt = sc.nextInt();
+			account a11 = (account) hm.get(ph1);
+			int reach = a11.getBal();
+			int total=reach+amt;
+			a11.setBal(total);
+			System.out.println("Name : "+a11.getName());
+			System.out.println("Total Balance : "+a11.getBal());
+		}
+		else {
+			System.out.println("Phone doesnot Exist");
+		}
+	    break;
+	}
+}
+}
